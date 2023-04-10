@@ -2,8 +2,8 @@
 <view class="container">
     <button bindtap="recordTime">点击打卡</button>
     <view class="button-group">
-        <button>列表形式</button>
-        <button>图表格式</button>
+        <button size="mini">列表形式</button>
+        <button size="mini">图表格式</button>
     </view>
 </view>
 <view class="list-container">
