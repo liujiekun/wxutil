@@ -1,0 +1,17 @@
+<!--pages/logs/percent.wxml-->
+<view class="container">
+	<view>请根据百分数计算出对应的分数，并输入对应的分母：</view>
+	<view>本次测试一共10题，当前是第<text>{{questionCount}}</text>题</view>
+	<view wx:if="{{!gameOver}}">{{question}}</view>
+	<input class="weui-input" wx:if="{{!gameOver}}" type="number" model:value="{{answer}}"></input>
+	<button class="submit-button" wx:if="{{!gameOver}}" bindtap="checkAnswer">提交答案</button>
+	<view>{{result}}</view>
+	<view class="questionList">
+		<text>已答列表</text>
+		<view class="question-item" wx:for="{{questionList}}">
+			<text>{{item.question}}</text>
+			<text>{{item.result}}</text>
+		</view>
+	</view>
+	<button wx:if="{{gameOver}}" bindtap="startAgain">重新开始</button>
+</view>

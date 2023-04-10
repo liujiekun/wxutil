@@ -1,0 +1,14 @@
+<!--pages/record/record.wxml-->
+<view class="container">
+    <button bindtap="recordTime">点击打卡</button>
+    <view class="button-group">
+        <button>列表形式</button>
+        <button>图表格式</button>
+    </view>
+</view>
+<view class="list-container">
+    <text class="title">打卡列表</text>
+    <view wx:for="{{list}}" wx:key="index">
+        <text>{{item.time}}</text>
+    </view>
+</view>

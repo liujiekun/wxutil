@@ -1,0 +1,18 @@
+/* pages/logs/percent.wxss */
+.container {
+  padding: 20rpx;
+}
+.weui-input{
+    border: 1px solid #D9D9D9;
+}
+.submit-button {
+    margin-top: 20rpx;
+}
+.questionList{
+    width: 100%;
+    margin-top: 40rpx;
+}
+.question-item{
+    display: flex;
+    justify-content: space-between;
+}

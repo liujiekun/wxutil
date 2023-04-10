@@ -1,0 +1,11 @@
+/* pages/record/record.wxss */
+.list-container{
+    width:100%;
+    padding: 20rpx;
+}
+.button-group{
+    display: flex;
+}
+.title{
+    font-size: 46rpx
+}
