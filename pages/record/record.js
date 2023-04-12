@@ -74,21 +74,16 @@ Page({
         }
     },
     getNextList(key){
-        console.log('key:', key)
         const data = {}
-        const reg = new RegExp(`${key}\/(\\d+)[^\/]`)
-        console.log('reg:', reg)
+        const reg = new RegExp(`${key}\/(\\d+)$`)
         Object.keys(fullData).forEach(item => {
-            console.log('1 item:', item, fullData[item])
             const result = item.match(reg)
             if(result){
-                console.log('2 item:', item, fullData[item])
                 const month = result[1]
                 const extraTitle = titleArr[depth]
                 data[`${month}${extraTitle}`] = fullData[item]
             }
         })
-        console.log('data:', data)
         this.setData({
             chartData: Object.values(data),
             categories: Object.keys(data)
@@ -145,7 +140,6 @@ Page({
         } else if(baseKey){ // 本身是年，再往后退就是总的了
             key = ''
         }
-        console.log('zoomOut,baseKey, key,depth', baseKey, key, depth)
         baseKey = key
         this.getPrevList(key).then(()=>{
             this.setData({
@@ -174,7 +168,6 @@ Page({
             this.setData({
                 chartTitle: generateTitle(baseKey)
             })
-            console.log('zoomIn,baseKey, key,depth', baseKey, key, depth)
             this.getNextList(key).then(()=>{
                 this.setData({
                     isMainChartDisplay: false
@@ -195,13 +188,11 @@ Page({
     getClientWidth(){
         try {
           var res = wx.getSystemInfoSync();
-          console.log(res)
           windowWidth = res.windowWidth;
           this.setData({
               scrollHeight: res.windowHeight-190
           })
         } catch (e) {
-          console.error('getSystemInfoSync failed!');
         }
     },
     sortList(){
