@@ -13,3 +13,20 @@
 .title{
     font-size: 46rpx
 }
+.chart-container{
+    width: 100%;
+}
+.chart-title {
+	text-align: center;
+	position: relative;
+	margin-top: 20rpx;
+	margin-bottom: 20rpx;
+}
+.back-btn {
+	position: absolute;
+	left: 20rpx;
+	top: 0;
+}
+.canvas {
+    width: 100%
+}

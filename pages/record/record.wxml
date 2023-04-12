@@ -1,14 +1,26 @@
 <!--pages/record/record.wxml-->
 <view class="container">
-    <button bindtap="recordTime">点击打卡</button>
-    <view class="button-group">
-        <button size="mini">列表形式</button>
-        <button size="mini">图表格式</button>
+    <view>
+        <button bindtap="recordTime">点击打卡</button>
+        <view class="button-group">
+            <button size="mini" bindtap="changeShowType" data-type="{{true}}">列表形式</button>
+            <button size="mini" bindtap="changeShowType" data-type="{{false}}">图表格式</button>
+        </view>
     </view>
-</view>
-<view class="list-container">
-    <text class="title">打卡列表</text>
-    <view wx:for="{{list}}" wx:key="index">
-        <text>{{item.time}}</text>
+    <view wx:if="{{listOrChat}}" class="list-container">
+        <text class="title">打卡列表</text>
+        <scroll-view scroll-y="true" style="height:{{scrollHeight}}px;">
+            <view wx:for="{{list}}" wx:key="index">
+                <text>{{item.time}}</text>
+            </view>
+        </scroll-view>
+    </view>
+    <view wx:else class="chart-container">
+        <view class="chart-title">
+            <view wx:if="{{!isMainChartDisplay}}" class="back-btn" bindtap="zoomOut">返回</view>
+            <text>{{chartTitle}}</text>
+        </view>
+        <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="zoomIn"></canvas>
+        <view wx:if="{{!isMainChartDisplay}}" style="text-align:center">点击数据每一项查看详情</view>
     </view>
 </view>
