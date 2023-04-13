@@ -51,15 +51,14 @@ Page({
     },
     getList(){
         const query = new AV.Query('Record')
-        query.descending('createAt')
+        query.descending('createdAt')
         query.find().then(recordList=>{
             this.setData({
                 list: recordList.map(item => ({
                     time: item.attributes.dateTime
                 }))
             })
-            fullData = formatList(recordList)
-            console.log('fullData:', fullData)
+            fullData = formatList(recordList.sort((a,b)=>{return a.createdAt-b.createdAt}))
         })
     },
     getPrevList(key){
