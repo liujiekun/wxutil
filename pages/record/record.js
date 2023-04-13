@@ -18,7 +18,8 @@ Page({
         chartTitle: '总打卡记录',
         isMainChartDisplay: true,
         chartData: [],
-        categories: []
+        categories: [],
+        userInfo: {}
     },
     changeShowType(e){
         const type = e.currentTarget.dataset.type
@@ -36,6 +37,7 @@ Page({
         const Record = AV.Object.extend('Record')
         const record = new Record()
         record.set('dateTime', formatTime(time))
+        record.set('cloudID', this.data.userInfo.cloudID)
         record.save().then(r=>{
             wx.showToast({
               title: '打卡成功',
@@ -49,8 +51,19 @@ Page({
               })
         })
     },
+    getUserInfo(){
+        wx.getUserInfo({
+            success: (res) => {
+              this.setData({
+                userInfo: {cloudID: res.encryptedData}
+              })
+              this.getList()
+            }
+          })
+    },
     getList(){
         const query = new AV.Query('Record')
+        query.equalTo('cloudID', this.data.userInfo.cloudID)
         query.descending('createdAt')
         query.find().then(recordList=>{
             this.setData({
@@ -208,8 +221,8 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady() {
-        this.getList()
-        this.getClientWidth()
+        this.getClientWidth(),
+        this.getUserInfo()
     },
     /**
      * 生命周期函数--监听页面显示
